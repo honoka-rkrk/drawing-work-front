@@ -1,7 +1,6 @@
-import React, { useEffect, useCallback, useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import CompLoginDialog from '../Component/login';
-import { getApi } from '../../../../Other/Api/api';
 import { FirebaseContext, UserContext } from '../../../../Other/Context/contexts';
 import { TwitterAuthProvider } from 'firebase/auth';
 
@@ -12,14 +11,6 @@ const LoginDialog: React.FC = () => {
 
   const backClick = useCallback(() => {
     navigate('/');
-  }, []);
-
-  const loginClick = useCallback(async () => {
-    // const api = await getApi('api/sample/');
-    // console.log(api);
-    // // if (api.success) {
-    // //   console.log(api.data);
-    // // }
   }, []);
 
   //react-firebaseuiのパッケージを使用、signInOptionsでプロバイダを増やせばそれに対応してログインボタンも増える。
@@ -50,14 +41,7 @@ const LoginDialog: React.FC = () => {
     }
   };
 
-  return (
-    <CompLoginDialog
-      uiConfig={uiConfig}
-      auth={auth}
-      backClick={backClick}
-      loginClick={loginClick}
-    />
-  );
+  return <CompLoginDialog uiConfig={uiConfig} auth={auth} backClick={backClick} />;
 };
 
 export default LoginDialog;

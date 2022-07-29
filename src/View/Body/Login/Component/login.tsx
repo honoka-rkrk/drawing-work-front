@@ -46,11 +46,10 @@ type LoginProps = {
   uiConfig: firebaseui.auth.Config;
   auth: Auth | null;
   backClick: () => void;
-  loginClick: () => void;
 };
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
-  const { uiConfig, auth, backClick, loginClick } = props;
+  const { uiConfig, auth, backClick } = props;
 
   return (
     <>
@@ -68,7 +67,6 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
           </DialogContentText>
         </CardContent>
         <CardActions>
-          <CustomButton onClick={loginClick}>ログイン</CustomButton>
           <CustomButton onClick={backClick}>戻る</CustomButton>
         </CardActions>
       </CustomCard>

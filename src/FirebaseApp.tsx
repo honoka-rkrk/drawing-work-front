@@ -2,8 +2,7 @@ import React, { FC, useEffect, useRef, useState, ReactNode } from 'react';
 
 import { User } from './Other/Model/user';
 import { FirebaseContext, UserContext } from './Other/Context/contexts';
-import findUser from './Other/Functions/find-user';
-import writeUser from './Other/Functions/write-user';
+import loginUser from './Other/Functions/login-user';
 import { db, auth } from './firebase';
 
 type FirebaseAppProps = {
@@ -19,11 +18,8 @@ const FirebaseApp: FC<FirebaseAppProps> = (props: FirebaseAppProps) => {
   //認証状態が変更されたときに引数として渡されたトリガー関数が実行されるオブザーバー
   const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
     if (firebaseUser) {
-      if (counterRef.current === 1 && credential) {
-        const theUser = await writeUser(firebaseUser, credential);
-        setUser(theUser);
-      } else if (!user) {
-        const theUser = await findUser(firebaseUser.uid);
+      const theUser = await loginUser(firebaseUser, credential);
+      if (theUser) {
         setUser(theUser);
       }
     } else {
